@@ -23,6 +23,7 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
         //PersonName
         RuleFor(temp => temp.PersonName).NotEmpty().WithMessage("PersonName is required");
 
+        //Gender
         RuleFor(temp => temp.Gender).IsInEnum().WithMessage("Gender must be Male, Female or Other");
 
     }

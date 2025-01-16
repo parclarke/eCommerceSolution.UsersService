@@ -31,12 +31,33 @@ namespace eCommerce.API
 
             builder.Services.AddFluentValidationAutoValidation();
 
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            }); 
+
             var app = builder.Build();
 
             app.UseExceptionHandlingMiddleware();
 
             // Routing
             app.UseRouting();
+
+            // Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            //Cors
+            app.UseCors();
 
             // Auth
             app.UseAuthentication();
